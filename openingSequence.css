@@ -1,0 +1,205 @@
+/* General Demo Style */
+@import url(http://fonts.googleapis.com/css?family=Dosis:200,600);
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+body {
+  font-family: 'Dosis', Calibri, Arial, sans-serif;
+  color: #fff;
+  background: #000;
+}
+
+.os-phrases h2 {
+  font-family: 'Dosis', 'Lato', sans-serif;
+  font-size: 70px;
+  font-weight: 200;
+  width: 100%;
+  overflow: hidden;
+  text-transform: uppercase; /*全てを大文字で表す*/
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  letter-spacing: 14px;
+  text-align: center;
+  opacity: 0;
+}
+
+/*flexboxレイアウトを整える*/
+.os-phrases h2,
+.os-phrases h2 > span {
+  height: 100%;
+  /* Centering with flexbox */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  /*flex*/
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  /*justigy*/
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  /*align-items*/
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+/*全てのh2に共通の定義*/
+.os-phrases h2 > span {
+  margin: 0 15px;
+}
+
+
+/*
+・孫要素に奥行きをつけて3次元オブジェクトにする
+・曾孫要素はその親要素と平行にならないようにする
+・曾孫要素だけをアニメーションで移動させる
+・親要素と子要素だけにすると、50%以降で単語ブロック（親要素）で移動してくるから良くない
+・という事はZ軸をバラになった孫要素だった移動しているのは
+・曾孫要素を移動させようとするとその親である曾孫要素まで動いてしまう。だから文字と文字ブロックの間に1つ親を挟む必要がある
+*/
+
+.os-phrases h2 > span > span { /*ラッパー要素*/
+  display: inline-block;
+  /*奥行きを標準サイズとる <- アニメーションで最後に少し近づいてくるような効果を与える*/
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  perspective: 1000px;
+  /*中央を始点にする*/
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+
+.os-phrases h2 > span > span > span {
+  display: inline-block;
+  color: transparent;
+
+  /*親要素と平行にならないようにする*/
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  /*3次元の移動と省略記法*/
+  -webkit-transform: translate3d(0,0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  /* アニメーションの定義：一定速度,一度きりで残留 */
+  -webkit-animation: OpeningSequence 5.2s linear infinite;
+  -moz-animation: OpeningSequence 5.2s linear infinite;
+  animation: OpeningSequence 5.2s linear infinite;
+}
+
+
+
+@-webkit-keyframes OpeningSequence {
+  0% {
+    text-shadow: 0 0 50px #fff; /*ぼかしておく*/
+    letter-spacing: 80px; /*横移動*/
+    opacity: 0;
+    -webkit-transform: rotateY(-90deg);
+  }
+  50% { /*中央で一旦停止するところ*/
+    text-shadow: 0 0 1px #fff; /*ぼかしを解除*/
+    letter-spacing: 14px;
+    opacity: 0.8;
+    -webkit-transform: rotateY(0deg); /*回転終了*/
+  }
+  85% { /*手前に近づけていく*/
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    -webkit-transform: rotateY(0deg) translateZ(100px);
+  }
+  100% {
+    text-shadow: 0 0 10px #fff;/*再度ぼかしていく*/
+    opacity: 0;
+    -webkit-transform: translateZ(130px);
+    pointer-events: none;
+  }
+}
+@-moz-keyframes OpeningSequence {
+  0% {
+    text-shadow: 0 0 50px #fff;
+    letter-spacing: 80px;
+    opacity: 0.2;
+    -moz-transform: rotateY(-90deg);
+  }
+  50% {
+    text-shadow: 0 0 1px #fff;
+    letter-spacing: 14px;
+    opacity: 0.8;
+    -moz-transform: rotateY(0deg);
+  }
+  85% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    -moz-transform: rotateY(0deg) translateZ(100px);
+  }
+  100% {
+    text-shadow: 0 0 10px #fff;
+    opacity: 0;
+    -moz-transform: translateZ(130px);
+    pointer-events: none;
+  }
+}
+@keyframes OpeningSequence {
+  0% {
+    text-shadow: 0 0 50px #fff;
+    letter-spacing: 80px;
+    opacity: 0.2;
+    transform: rotateY(-90deg);
+  }
+  50% {
+    text-shadow: 0 0 1px #fff;
+    letter-spacing: 14px;
+    opacity: 0.8;
+    transform: rotateY(0deg);
+  }
+  85% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    transform: rotateY(0deg) translateZ(100px);
+  }
+  100% {
+    text-shadow: 0 0 10px #fff;
+    opacity: 0;
+    transform: translateZ(130px);
+    pointer-events: none;
+  }
+}
+
+/* Bold words */
+.os-phrases h2:first-child .word3,
+.os-phrases h2:nth-child(2) .word2,
+.os-phrases h2:nth-child(4) .word2 {
+  font-weight: 600;
+}
