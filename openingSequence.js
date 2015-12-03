@@ -8,7 +8,7 @@
 
 
  $(function(){
-  $("#os-phrases > h2")
+  $("#txt > h2")
     .css('opacity', 1)
     .lettering( 'words' ) /*この引数は何？*/
     .children( "span" ).lettering()

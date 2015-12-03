@@ -1,4 +1,3 @@
-/* General Demo Style */
 @import url(http://fonts.googleapis.com/css?family=Dosis:200,600);
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
@@ -13,23 +12,13 @@ body, html {
   height: 100%;
 }
 
-/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
-.clearfix:before, .clearfix:after {
-  content: " ";
-  display: table;
-}
-
-.clearfix:after {
-  clear: both;
-}
-
 body {
   font-family: 'Dosis', Calibri, Arial, sans-serif;
   color: #fff;
   background: #000;
 }
 
-.os-phrases h2 {
+.txt h2 {
   font-family: 'Dosis', 'Lato', sans-serif;
   font-size: 70px;
   font-weight: 200;
@@ -47,8 +36,8 @@ body {
 }
 
 /*flexboxレイアウトを整える*/
-.os-phrases h2,
-.os-phrases h2 > span {
+.txt h2,
+.txt h2 > span {
   height: 100%;
   /* Centering with flexbox */
   display: -webkit-box;
@@ -75,21 +64,11 @@ body {
 }
 
 /*全てのh2に共通の定義*/
-.os-phrases h2 > span {
+.txt h2 > span {
   margin: 0 15px;
 }
 
-
-/*
-・孫要素に奥行きをつけて3次元オブジェクトにする
-・曾孫要素はその親要素と平行にならないようにする
-・曾孫要素だけをアニメーションで移動させる
-・親要素と子要素だけにすると、50%以降で単語ブロック（親要素）で移動してくるから良くない
-・という事はZ軸をバラになった孫要素だった移動しているのは
-・曾孫要素を移動させようとするとその親である曾孫要素まで動いてしまう。だから文字と文字ブロックの間に1つ親を挟む必要がある
-*/
-
-.os-phrases h2 > span > span { /*ラッパー要素*/
+.txt h2 > span > span { /*ラッパー要素*/
   display: inline-block;
   /*奥行きを標準サイズとる <- アニメーションで最後に少し近づいてくるような効果を与える*/
   -webkit-perspective: 1000px;
@@ -101,7 +80,7 @@ body {
   transform-origin: 50% 50%;
 }
 
-.os-phrases h2 > span > span > span {
+.txt h2 > span > span > span {
   display: inline-block;
   color: transparent;
 
@@ -197,9 +176,9 @@ body {
   }
 }
 
-/* Bold words */
-.os-phrases h2:first-child .word3,
-.os-phrases h2:nth-child(2) .word2,
-.os-phrases h2:nth-child(4) .word2 {
+/* フレーズによって太くする */
+.txt h2:first-child .word3,
+.txt h2:first-child .word4,
+{
   font-weight: 600;
 }
